@@ -5,11 +5,19 @@ const Trip = require('./Trip');
 // TODO Define the relationships between the models
 
 Location.belongsToMany(Traveller, {
-    through: Trip,
+    through: {
+        model: Trip,
+        unique: false
+    },
+    as: 'planned_trips'
 });
 
 Traveller.belongsToMany(Location, {
-    through: Trip,
-})
+    through: {
+        model: Trip,
+        unique: false
+    },
+    as: 'location_travellers'
+});
 
 module.exports = { Traveller, Location, Trip };
